@@ -4,9 +4,9 @@
   <worldbody>
     <body name="robot_06_torso_link" pos="-5.5000 -5.2000 0.9000" euler="0 0 1.5707963268">
       <joint type="free" />
-      <inertial pos="0.0009803 -0.0006637 0.180334" mass="9.4921" fullinertia="0.132502038 0.119256879 0.0345011038 0.0001948163 3.28823e-05 -0.0008300631" />
+      <inertial pos="0.00119101608 -0.000616756585 0.171304113" mass="9.9317" fullinertia="0.150214068 0.137087305 0.034883289 0.000189441331 0.000509034904 -0.000741135778" />
       <site name="robot_06_imu" size="0.01" pos="0 0 0" />
-      <geom pos="0 0 -0.043" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="torso_link" />
+      <geom pos="0 0 -0.043" type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="torso_link" material="team_red_mat" />
       <body name="robot_06_left_shoulder_pitch_link" pos="0 0.0983462 0.248497">
         <inertial pos="0.0037232 0.0485811 -0.0106672" quat="0.258361 0.517304 -0.733303 0.357649" mass="0.7769" diaginertia="0.000682082 0.00065098 0.000557538" />
         <joint name="robot_06_left_shoulder_pitch" pos="0 0 0" axis="0 0.961262 0.275637" range="-3.07 2.67" actuatorfrcrange="-25 25" armature="0.0027" />
@@ -14,11 +14,11 @@
         <body name="robot_06_left_shoulder_roll_link" pos="0 0.0509 0.0002">
           <inertial pos="0.0035764 0.0036958 -0.0345743" quat="0.631758 -0.205839 -0.106576 0.739698" mass="0.33" diaginertia="0.000510191 0.000427968 0.000318454" />
           <joint name="robot_06_left_shoulder_roll" pos="0 0 0" axis="1 0 0" range="-0.174 2.25" actuatorfrcrange="-25 25" armature="0.0027" />
-          <geom quat="0.995953 0.0898785 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_shoulder_roll_link" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_shoulder_roll_link" />
           <body name="robot_06_left_shoulder_yaw_link" pos="0 0.00624 -0.0735">
             <inertial pos="0.0073701 0.0030383 -0.0692752" quat="0.967498 -0.0116065 0.0888507 0.236471" mass="1.2599" diaginertia="0.00338818 0.0032544 0.000899992" />
             <joint name="robot_06_left_shoulder_yaw" pos="0 0 0" axis="0 0 1" range="-2.61 2.61" actuatorfrcrange="-25 25" armature="0.0027" />
-            <geom pos="0 0 0.0015" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_shoulder_yaw_link" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_shoulder_yaw_link" />
             <body name="robot_06_left_elbow_link" pos="0.015 0 -0.1093">
               <inertial pos="-0.006041 0.0173863 -0.0247792" quat="0.785808 0.316909 -0.207813 0.488762" mass="0.1228" diaginertia="0.000182456 0.000137329 7.59709e-05" />
               <joint name="robot_06_left_elbow" pos="0 0 0" axis="0 1 0" range="-2.09 1.04" actuatorfrcrange="-25 25" armature="0.0027" />
@@ -26,7 +26,7 @@
               <body name="robot_06_left_wrist_yaw_link" pos="-0.00976 0 -0.053">
                 <inertial pos="-5.22e-05 -0.0012047 -0.0348477" quat="0.998376 0.0569511 -0.00101611 6.95033e-05" mass="0.7793" diaginertia="0.000956971 0.000831658 0.000599794" />
                 <joint name="robot_06_left_wrist_yaw" pos="0 0 0" axis="0 0 1" range="-1.97 1.97" actuatorfrcrange="-25 25" armature="0.0027" />
-                <geom pos="-4e-05 0 0.004" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_wrist_yaw_link" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_wrist_yaw_link" />
                 <body name="robot_06_left_wrist_pitch_link" pos="0 0 -0.095">
                   <inertial pos="0.0027251 0.002432 -0.0263567" quat="0.911177 0.0223992 -0.0607032 0.406903" mass="0.5756" diaginertia="0.000697269 0.00064298 0.000321109" />
                   <joint name="robot_06_left_wrist_pitch" pos="0 0 0" axis="0 1 0" range="-1.61 1.61" actuatorfrcrange="-12 12" armature="0.005521" />
@@ -35,16 +35,27 @@
                     <inertial pos="-1.32e-05 1.32e-05 -0.0186687" quat="0.478415 0.520454 0.520908 0.478436" mass="0.1018" diaginertia="0.000110919 9.82421e-05 4.01095e-05" />
                     <joint name="robot_06_left_wrist_roll" pos="0 0 0" axis="1 0 0" range="-1.61 1.61" actuatorfrcrange="-12 12" armature="0.005521" />
                     <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_wrist_roll_link" />
-                    <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.1 0.1 1" mesh="T4Lhand" />
-                    <geom pos="0 0 -0.02" type="box" size="0.025 0.015 0.05" rgba="0.76 0.76 0.76 0" />
+                    <geom pos="0 0 -0.038" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.1 0.1 1" mesh="left_openhand" />
+                    <geom name="robot_06_left_wrist_roll_link_collision_0" type="capsule" fromto="0 0.005 -0.095 -0.001 0 -0.06" size="0.025" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_wrist_roll_link_collision_1" type="capsule" fromto="0.008 0 0 -0.008 0 0" size="0.0325" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_wrist_roll_link_collision_2" type="capsule" fromto="0.009 0 -0.033 -0.009 0 -0.033" size="0.028" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_wrist_roll_link_collision_3" type="capsule" fromto="0 0.015 -0.093 0.007 -0.011 -0.196" size="0.007" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_wrist_roll_link_collision_4" type="capsule" fromto="0.016 0.015 -0.093 0.023 -0.01 -0.19" size="0.007" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_wrist_roll_link_collision_5" type="capsule" fromto="-0.009 0.015 -0.098 -0.01 -0.015 -0.188" size="0.007" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_wrist_roll_link_collision_6" type="capsule" fromto="-0.022 0.01 -0.068 -0.025 -0.016 -0.179" size="0.007" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_wrist_roll_link_collision_7" type="capsule" fromto="0.016 -0.01 -0.068 0.049 -0.035 -0.126" size="0.007" density="0" group="3" rgba="1 0.3 0.3 0.35" />
                   </body>
+                  <geom name="robot_06_left_wrist_pitch_link_collision_0" type="capsule" fromto="0 -0.011 0 0 0.006 0" size="0.035" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                  <geom name="robot_06_left_wrist_pitch_link_collision_1" type="capsule" fromto="0 0 -0.055 0 0 -0.02" size="0.032" density="0" group="3" rgba="1 0.3 0.3 0.35" />
                 </body>
+                <geom name="robot_06_left_wrist_yaw_link_collision_0" type="capsule" fromto="0 0 0.007 0 0 -0.058" size="0.037" density="0" group="3" rgba="1 0.3 0.3 0.35" />
               </body>
-              <geom quat="0.707388 0.706825 0 0" type="cylinder" size="0.04 0.025" rgba="0.76 0.76 0.76 0" />
+              <geom name="robot_06_left_elbow_link_collision_0" type="capsule" fromto="0 -0.01 0 0 0.02 0" size="0.037" density="0" group="3" rgba="1 0.3 0.3 0.35" />
             </body>
           </body>
-          <geom quat="0.707388 0 0.706825 0" type="cylinder" size="0.04 0.03" rgba="0.76 0.76 0.76 0" />
+          <geom name="robot_06_left_shoulder_roll_link_collision_0" type="capsule" fromto="0 0.0065 -0.13 0 0.0065 -0.015" size="0.0365" density="0" group="3" rgba="1 0.3 0.3 0.35" />
         </body>
+        <geom name="robot_06_left_shoulder_pitch_link_collision_0" type="capsule" fromto="0.01 0.05 0 -0.01 0.05 0" size="0.04" density="0" group="3" rgba="1 0.3 0.3 0.35" />
       </body>
       <body name="robot_06_right_shoulder_pitch_link" pos="0 -0.0983462 0.248497">
         <inertial pos="0.0037232 -0.0485811 -0.0106672" quat="0.517304 0.258361 -0.357649 0.733303" mass="0.7769" diaginertia="0.000682082 0.00065098 0.000557538" />
@@ -53,11 +64,11 @@
         <body name="robot_06_right_shoulder_roll_link" pos="0 -0.0509 0.0002">
           <inertial pos="0.0035764 -0.0036958 -0.0345743" quat="0.739698 -0.106576 -0.205839 0.631758" mass="0.33" diaginertia="0.000510191 0.000427968 0.000318454" />
           <joint name="robot_06_right_shoulder_roll" pos="0 0 0" axis="1 0 0" range="-2.25 0.174" actuatorfrcrange="-25 25" armature="0.0027" />
-          <geom quat="0.995953 -0.0898785 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_shoulder_roll_link" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_shoulder_roll_link" />
           <body name="robot_06_right_shoulder_yaw_link" pos="0 -0.00624 -0.0735">
             <inertial pos="0.0073701 -0.0030383 -0.0692752" quat="0.967498 0.0116065 0.0888507 -0.236471" mass="1.2599" diaginertia="0.00338818 0.0032544 0.000899992" />
             <joint name="robot_06_right_shoulder_yaw" pos="0 0 0" axis="0 0 1" range="-2.61 2.61" actuatorfrcrange="-25 25" armature="0.0027" />
-            <geom pos="0 0 0.0015" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_shoulder_yaw_link" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_shoulder_yaw_link" />
             <body name="robot_06_right_elbow_link" pos="0.015 0 -0.1093">
               <inertial pos="-0.006041 -0.0173863 -0.0247792" quat="0.488762 -0.207813 0.316909 0.785808" mass="0.1228" diaginertia="0.000182456 0.000137329 7.59709e-05" />
               <joint name="robot_06_right_elbow" pos="0 0 0" axis="0 1 0" range="-2.09 1.04" actuatorfrcrange="-25 25" armature="0.0027" />
@@ -65,7 +76,7 @@
               <body name="robot_06_right_wrist_yaw_link" pos="-0.00976 0 -0.053">
                 <inertial pos="-5.22e-05 0.0012047 -0.0348477" quat="0.998376 -0.0569511 -0.00101611 -6.95033e-05" mass="0.7793" diaginertia="0.000956971 0.000831658 0.000599794" />
                 <joint name="robot_06_right_wrist_yaw" pos="0 0 0" axis="0 0 1" range="-1.97 1.97" actuatorfrcrange="-25 25" armature="0.0027" />
-                <geom pos="-4e-05 0 0.004" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_wrist_yaw_link" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_wrist_yaw_link" />
                 <body name="robot_06_right_wrist_pitch_link" pos="0 0 -0.095">
                   <inertial pos="0.0027251 -0.002432 -0.0263567" quat="0.406903 -0.0607032 0.0223992 0.911177" mass="0.5756" diaginertia="0.000697269 0.00064298 0.000321109" />
                   <joint name="robot_06_right_wrist_pitch" pos="0 0 0" axis="0 1 0" range="-1.61 1.61" actuatorfrcrange="-12 12" armature="0.005521" />
@@ -74,16 +85,27 @@
                     <inertial pos="-1.32e-05 -1.32e-05 -0.0186687" quat="0.478436 0.520908 0.520454 0.478415" mass="0.1018" diaginertia="0.000110919 9.82421e-05 4.01095e-05" />
                     <joint name="robot_06_right_wrist_roll" pos="0 0 0" axis="1 0 0" range="-1.61 1.61" actuatorfrcrange="-12 12" armature="0.005521" />
                     <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_wrist_roll_link" />
-                    <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.1 0.1 1" mesh="T4Rhand" />
-                    <geom pos="0 0 -0.02" type="box" size="0.025 0.015 0.05" rgba="0.76 0.76 0.76 0" />
+                    <geom pos="0 0 -0.038" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.1 0.1 1" mesh="right_openhand" />
+                    <geom name="robot_06_right_wrist_roll_link_collision_0" type="capsule" fromto="0 -0.005 -0.095 -0.001 0 -0.06" size="0.025" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_wrist_roll_link_collision_1" type="capsule" fromto="0.008 0 0 -0.008 0 0" size="0.0325" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_wrist_roll_link_collision_2" type="capsule" fromto="0.009 0 -0.033 -0.009 0 -0.033" size="0.028" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_wrist_roll_link_collision_3" type="capsule" fromto="0 -0.015 -0.093 0.007 0.011 -0.196" size="0.007" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_wrist_roll_link_collision_4" type="capsule" fromto="0.016 -0.015 -0.093 0.023 0.01 -0.19" size="0.007" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_wrist_roll_link_collision_5" type="capsule" fromto="-0.009 -0.015 -0.098 -0.01 0.015 -0.188" size="0.007" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_wrist_roll_link_collision_6" type="capsule" fromto="-0.022 -0.01 -0.068 -0.025 0.016 -0.179" size="0.007" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_wrist_roll_link_collision_7" type="capsule" fromto="0.016 0.01 -0.068 0.049 0.035 -0.126" size="0.007" density="0" group="3" rgba="1 0.3 0.3 0.35" />
                   </body>
+                  <geom name="robot_06_right_wrist_pitch_link_collision_0" type="capsule" fromto="0 0.011 0 0 -0.006 0" size="0.035" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                  <geom name="robot_06_right_wrist_pitch_link_collision_1" type="capsule" fromto="0 0 -0.055 0 0 -0.02" size="0.032" density="0" group="3" rgba="1 0.3 0.3 0.35" />
                 </body>
+                <geom name="robot_06_right_wrist_yaw_link_collision_0" type="capsule" fromto="0 0 0.007 0 0 -0.058" size="0.037" density="0" group="3" rgba="1 0.3 0.3 0.35" />
               </body>
-              <geom quat="0.707388 0.706825 0 0" type="cylinder" size="0.04 0.025" rgba="0.76 0.76 0.76 0" />
+              <geom name="robot_06_right_elbow_link_collision_0" type="capsule" fromto="0 0.01 0 0 -0.02 0" size="0.037" density="0" group="3" rgba="1 0.3 0.3 0.35" />
             </body>
           </body>
-          <geom quat="0.707388 0 0.706825 0" type="cylinder" size="0.04 0.03" rgba="0.76 0.76 0.76 0" />
+          <geom name="robot_06_right_shoulder_roll_link_collision_0" type="capsule" fromto="0 -0.0065 -0.13 0 -0.0065 -0.015" size="0.0365" density="0" group="3" rgba="1 0.3 0.3 0.35" />
         </body>
+        <geom name="robot_06_right_shoulder_pitch_link_collision_0" type="capsule" fromto="0.01 -0.05 0 -0.01 -0.05 0" size="0.04" density="0" group="3" rgba="1 0.3 0.3 0.35" />
       </body>
       <body name="robot_06_waist_yaw_link" pos="0 0 -0.043">
         <inertial pos="0.0042139 0 -0.0887602" quat="0.999472 -6.49396e-05 0.032497 3.56589e-05" mass="4.7877" diaginertia="0.0155281 0.0131444 0.0110578" />
@@ -96,11 +118,11 @@
           <body name="robot_06_left_hip_roll_link" pos="0 0.05 -0.03">
             <inertial pos="0.0261756 0.0001913 -0.0860391" quat="0.951646 0.00528821 -0.305508 0.0317115" mass="1.8991" diaginertia="0.00427594 0.00382477 0.0029972" />
             <joint name="robot_06_left_hip_roll" pos="0 0 0" axis="1 0 0" range="-0.523 2.96" actuatorfrcrange="-140 140" armature="0.041" />
-            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_hip_roll_link" />
+            <geom pos="0.02 0 0" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_hip_roll_link" />
             <body name="robot_06_left_hip_yaw_link" pos="0.02 0 -0.134">
               <inertial pos="-0.0092605 -0.0035838 -0.121289" quat="0.870825 -0.0122641 -0.0853219 0.483976" mass="2.2656" diaginertia="0.0112204 0.0107205 0.0026328" />
               <joint name="robot_06_left_hip_yaw" pos="0 0 0" axis="0 0 1" range="-2.75 2.75" actuatorfrcrange="-140 140" armature="0.041" />
-              <geom pos="0 0 0.059" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_hip_yaw_link" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="left_hip_yaw_link" />
               <body name="robot_06_left_knee_link" pos="-0.02 0 -0.1674">
                 <inertial pos="0.0045995 -0.0022464 -0.13578" quat="0.743085 -0.0125826 0.0288934 0.668454" mass="2.5335" diaginertia="0.0135744 0.0133279 0.00253381" />
                 <joint name="robot_06_left_knee" pos="0 0 0" axis="0 1 0" range="-0.0872 2.44" actuatorfrcrange="-140 140" armature="0.041" />
@@ -123,24 +145,27 @@
                     <inertial pos="0.0341488 0 0.0049007" quat="-7.87561e-05 0.691127 -0.000136537 0.722734" mass="1.5022" diaginertia="0.00604345 0.00560002 0.000686558" />
                     <joint name="robot_06_left_ankle_passive_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.261 0.261" damping="0.5" frictionloss="0.2" />
                     <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.1 0.1 1" mesh="left_ankle_roll_link" />
-                    <geom name="robot_06_left_foot1_collision" type="capsule" size="0.01" fromto="0.12 -0.030 -0.0245 0.05 -0.030 -0.0245" />
-                    <geom name="robot_06_left_foot2_collision" type="capsule" size="0.01" fromto="-0.046 -0.020 -0.0245 0.133 -0.020 -0.0245" />
-                    <geom name="robot_06_left_foot3_collision" type="capsule" size="0.01" fromto="-0.056 -0.01 -0.0245 0.14 -0.01 -0.0245" />
-                    <geom name="robot_06_left_foot4_collision" type="capsule" size="0.01" fromto="-0.056 0 -0.0245 0.143 0 -0.0245" />
-                    <geom name="robot_06_left_foot5_collision" type="capsule" size="0.01" fromto="-0.056 0.01 -0.0245 0.14 0.01 -0.0245" />
-                    <geom name="robot_06_left_foot6_collision" type="capsule" size="0.01" fromto="-0.046 0.020 -0.0245 0.133 0.020 -0.0245" />
-                    <geom name="robot_06_left_foot7_collision" type="capsule" size="0.01" fromto="0.12 0.030 -0.0245 0.05 0.030 -0.0245" />
                     <site name="robot_06_left_foot" rgba="1 0 0 1" pos="0.044 0 -0.052" />
                     <site name="robot_06_left_foot_1_site" pos="0.023 0.0147 0.012" rgba="0 1 0 1" />
                     <site name="robot_06_left_foot_2_site" pos="0.023 -0.0147 0.012" rgba="0 1 0 1" />
+                    <geom name="robot_06_left_ankle_roll_link_collision_0" type="capsule" fromto="0.125 -0.03 -0.0245 0.055 -0.03 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_ankle_roll_link_collision_1" type="capsule" fromto="-0.041 -0.02 -0.0245 0.138 -0.02 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_ankle_roll_link_collision_2" type="capsule" fromto="-0.05 -0.01 -0.0245 0.145 -0.01 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_ankle_roll_link_collision_3" type="capsule" fromto="-0.051 0 -0.0245 0.148 0 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_ankle_roll_link_collision_4" type="capsule" fromto="-0.051 0.01 -0.0245 0.145 0.01 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_ankle_roll_link_collision_5" type="capsule" fromto="-0.041 0.02 -0.0245 0.138 0.02 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_ankle_roll_link_collision_6" type="capsule" fromto="0.125 0.03 -0.0245 0.055 0.03 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_left_ankle_roll_link_collision_7" type="capsule" fromto="-0.036 0 -0.0115 0.115 0 -0.0115" size="0.025" density="0" group="3" rgba="1 0.3 0.3 0.35" />
                   </body>
                 </body>
-                <geom quat="0.707388 0.706825 0 0" type="cylinder" size="0.05 0.05" rgba="0.76 0.76 0.76 0" />
-                <geom pos="0 0 -0.16" type="cylinder" size="0.04 0.14" rgba="0.76 0.76 0.76 0" />
+                <geom name="robot_06_left_knee_link_collision_0" type="capsule" fromto="0.012 0 -0.26 0.026 0 -0.03" size="0.04" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                <geom name="robot_06_left_knee_link_collision_1" type="capsule" fromto="-0.014 0 -0.195 -0.014 0 -0.08" size="0.04" density="0" group="3" rgba="1 0.3 0.3 0.35" />
               </body>
+              <geom name="robot_06_left_hip_yaw_link_collision_0" type="capsule" fromto="-0.02 0.0085 -0.168 -0.02 -0.016 -0.168" size="0.05" density="0" group="3" rgba="1 0.3 0.3 0.35" />
             </body>
-            <geom quat="0.707388 0 0.706825 0" type="cylinder" size="0.045 0.065" rgba="0.76 0.76 0.76 0" />
+            <geom name="robot_06_left_hip_roll_link_collision_0" type="capsule" fromto="0.02 0 0 0.02 0 -0.22" size="0.055" density="0" group="3" rgba="1 0.3 0.3 0.35" />
           </body>
+          <geom name="robot_06_left_hip_pitch_link_collision_0" type="capsule" fromto="0 -0.01 -0.005 0 0.05 -0.03" size="0.055" density="0" group="3" rgba="1 0.3 0.3 0.35" />
         </body>
         <body name="robot_06_right_hip_pitch_link" pos="0 -0.0675 -0.1142">
           <inertial pos="0.0002425 -0.0476417 -0.0275973" quat="0.913409 0.368286 -0.0552969 0.164292" mass="1.4382" diaginertia="0.00165363 0.00151186 0.00125783" />
@@ -149,11 +174,11 @@
           <body name="robot_06_right_hip_roll_link" pos="0 -0.05 -0.03">
             <inertial pos="0.0261756 -0.0001913 -0.0860391" quat="0.951646 -0.00528821 -0.305508 -0.0317115" mass="1.8991" diaginertia="0.00427594 0.00382477 0.0029972" />
             <joint name="robot_06_right_hip_roll" pos="0 0 0" axis="1 0 0" range="-2.96 0.523" actuatorfrcrange="-140 140" armature="0.041" />
-            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_hip_roll_link" />
+            <geom pos="0.02 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_hip_roll_link" />
             <body name="robot_06_right_hip_yaw_link" pos="0.02 0 -0.134">
               <inertial pos="-0.0092605 0.0035838 -0.121289" quat="0.483976 -0.0853219 -0.0122641 0.870825" mass="2.2656" diaginertia="0.0112204 0.0107205 0.0026328" />
               <joint name="robot_06_right_hip_yaw" pos="0 0 0" axis="0 0 1" range="-2.75 2.75" actuatorfrcrange="-140 140" armature="0.041" />
-              <geom pos="0 0 0.059" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_hip_yaw_link" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.418 0.418 0.418 1" mesh="right_hip_yaw_link" />
               <body name="robot_06_right_knee_link" pos="-0.02 0 -0.1674">
                 <inertial pos="0.0045995 0.0022464 -0.13578" quat="0.668454 0.0288934 -0.0125826 0.743085" mass="2.5335" diaginertia="0.0135744 0.0133279 0.00253381" />
                 <joint name="robot_06_right_knee" pos="0 0 0" axis="0 1 0" range="-0.0872 2.44" actuatorfrcrange="-140 140" armature="0.041" />
@@ -176,38 +201,47 @@
                     <inertial pos="0.0341488 0 0.0049007" quat="7.87561e-05 0.691127 0.000136537 0.722734" mass="1.5022" diaginertia="0.00604345 0.00560002 0.000686558" />
                     <joint name="robot_06_right_ankle_passive_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.261 0.261" damping="0.5" frictionloss="0.2" />
                     <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.1 0.1 1" mesh="right_ankle_roll_link" />
-                    <geom name="robot_06_right_foot1_collision" type="capsule" size="0.01" fromto="0.12 -0.030 -0.0245 0.05 -0.030 -0.0245" />
-                    <geom name="robot_06_right_foot2_collision" type="capsule" size="0.01" fromto="-0.046 -0.020 -0.0245 0.133 -0.020 -0.0245" />
-                    <geom name="robot_06_right_foot3_collision" type="capsule" size="0.01" fromto="-0.056 -0.01 -0.0245 0.14 -0.01 -0.0245" />
-                    <geom name="robot_06_right_foot4_collision" type="capsule" size="0.01" fromto="-0.056 0 -0.0245 0.143 0 -0.0245" />
-                    <geom name="robot_06_right_foot5_collision" type="capsule" size="0.01" fromto="-0.056 0.01 -0.0245 0.14 0.01 -0.0245" />
-                    <geom name="robot_06_right_foot6_collision" type="capsule" size="0.01" fromto="-0.046 0.020 -0.0245 0.133 0.020 -0.0245" />
-                    <geom name="robot_06_right_foot7_collision" type="capsule" size="0.01" fromto="0.12 0.030 -0.0245 0.05 0.030 -0.0245" />
                     <site name="robot_06_right_foot" rgba="1 0 0 1" pos="0.044 0 -0.052" />
                     <site name="robot_06_right_foot_1_site" pos="0.023 -0.0147 0.012" rgba="0 1 0 1" />
                     <site name="robot_06_right_foot_2_site" pos="0.023 0.0147 0.012" rgba="0 1 0 1" />
+                    <geom name="robot_06_right_ankle_roll_link_collision_0" type="capsule" fromto="0.125 0.03 -0.0245 0.055 0.03 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_ankle_roll_link_collision_1" type="capsule" fromto="-0.041 0.02 -0.0245 0.138 0.02 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_ankle_roll_link_collision_2" type="capsule" fromto="-0.05 0.01 -0.0245 0.145 0.01 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_ankle_roll_link_collision_3" type="capsule" fromto="-0.051 0 -0.0245 0.148 0 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_ankle_roll_link_collision_4" type="capsule" fromto="-0.051 -0.01 -0.0245 0.145 -0.01 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_ankle_roll_link_collision_5" type="capsule" fromto="-0.041 -0.02 -0.0245 0.138 -0.02 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_ankle_roll_link_collision_6" type="capsule" fromto="0.125 -0.03 -0.0245 0.055 -0.03 -0.0245" size="0.01" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                    <geom name="robot_06_right_ankle_roll_link_collision_7" type="capsule" fromto="-0.036 0 -0.0115 0.115 0 -0.0115" size="0.025" density="0" group="3" rgba="1 0.3 0.3 0.35" />
                   </body>
                 </body>
-                <geom quat="0.707388 0.706825 0 0" type="cylinder" size="0.05 0.05" rgba="0.76 0.76 0.76 0" />
-                <geom pos="0 0 -0.16" type="cylinder" size="0.04 0.14" rgba="0.76 0.76 0.76 0" />
+                <geom name="robot_06_right_knee_link_collision_0" type="capsule" fromto="0.012 0 -0.26 0.026 0 -0.03" size="0.04" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+                <geom name="robot_06_right_knee_link_collision_1" type="capsule" fromto="-0.014 0 -0.195 -0.014 0 -0.08" size="0.04" density="0" group="3" rgba="1 0.3 0.3 0.35" />
               </body>
+              <geom name="robot_06_right_hip_yaw_link_collision_0" type="capsule" fromto="-0.02 -0.0085 -0.168 -0.02 0.016 -0.168" size="0.05" density="0" group="3" rgba="1 0.3 0.3 0.35" />
             </body>
-            <geom quat="0.707388 0 0.706825 0" type="cylinder" size="0.045 0.065" rgba="0.76 0.76 0.76 0" />
+            <geom name="robot_06_right_hip_roll_link_collision_0" type="capsule" fromto="0.02 0 0 0.02 0 -0.22" size="0.055" density="0" group="3" rgba="1 0.3 0.3 0.35" />
           </body>
+          <geom name="robot_06_right_hip_pitch_link_collision_0" type="capsule" fromto="0 0.01 -0.005 0 -0.05 -0.03" size="0.055" density="0" group="3" rgba="1 0.3 0.3 0.35" />
         </body>
+        <geom name="robot_06_waist_yaw_link_collision_0" type="capsule" fromto="0 0 -0.02 0 0 -0.06" size="0.046" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+        <geom name="robot_06_waist_yaw_link_collision_1" type="capsule" fromto="0.008 -0.016 -0.102 0.008 0.016 -0.102" size="0.073" density="0" group="3" rgba="1 0.3 0.3 0.35" />
       </body>
-      <body name="robot_06_head_pitch_link" pos="0.00155 0 0.3155">
-        <inertial pos="0 0 0" mass="0.01" diaginertia="3e-05 3e-05 3e-05" />
-        <joint name="robot_06_head_pitch" pos="0 0 0" axis="0 1 0" range="-1.309 1.309" actuatorfrcrange="-12 12" armature="0.005521" />
-        <geom size="0.02" contype="0" conaffinity="0" group="1" density="0" rgba="0.76 0.76 0.76 0.8" />
-        <body name="robot_06_head_yaw_link" pos="0 0 0.0795">
-          <inertial pos="0.00627273 0 0.00618182" quat="0.65229 0.27298 0.27298 0.65229" mass="0.011" diaginertia="4.15318e-05 4.15318e-05 3.3e-05" />
-          <joint name="robot_06_head_yaw" pos="0 0 0" axis="0 0 1" range="-1.57 1.57" actuatorfrcrange="-12 12" armature="0.005521" />
-          <geom pos="-0.00555 0 0.025" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.1 0.1 1" mesh="head_yaw_link" />
-          <camera name="robot_06_depth_cam" pos="0.069 0.01 0.068" xyaxes="0 -1 0 0 0 1" fovy="58.29" resolution="64 36" />
+      <body name="robot_06_head_yaw_link" pos="0.0005 0 0.325">
+        <inertial pos="0.0001031 0.0036049 0.0463794" quat="0.990737 0.135795 0 0" mass="0.2434" diaginertia="0.000127 0.000122794 8.42062e-05" />
+        <joint name="robot_06_head_yaw" pos="0 0 0" axis="0 0 1" range="-1.57 1.57" actuatorfrcrange="-12 12" armature="0.005521" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.1 0.1 1" mesh="head_yaw_link" />
+        <body name="robot_06_head_pitch_link" pos="0 0 0.054">
+          <inertial pos="0.00733536 0.000581143 0.0633259" quat="0.710737 -0.022617 -0.0131564 0.702971" mass="0.8857" diaginertia="0.00295545 0.00272757 0.0020675" />
+          <joint name="robot_06_head_pitch" pos="0 0 0" axis="0 1 0" range="-0.436 0.436" actuatorfrcrange="-12 12" armature="0.005521" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.1 0.1 1" mesh="head_pitch_link" />
+          <camera name="robot_06_depth_cam" pos="0.065162 0 0.0934945" xyaxes="0 -1 0 0.587785 0 0.809017" fovy="58.29" resolution="64 36" />
+          <geom name="robot_06_head_pitch_link_collision_0" type="capsule" fromto="0.0075 0 0.04 0.0045 0 0.089" size="0.072" density="0" group="3" rgba="1 0.3 0.3 0.35" />
         </body>
+        <geom name="robot_06_head_yaw_link_collision_0" type="capsule" fromto="0.0015 0 -0.015 0.0015 0 0.055" size="0.039" density="0" group="3" rgba="1 0.3 0.3 0.35" />
       </body>
-      <geom pos="0 0 0.12" type="box" size="0.05 0.08 0.17" rgba="0.76 0.76 0.76 0" />
+      <geom name="robot_06_torso_link_collision_0" type="capsule" fromto="-0.005 0 0.22 0.005 0 0.05" size="0.096" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+      <geom name="robot_06_torso_link_collision_1" type="capsule" fromto="0.04 -0.05 0.22 0.05 -0.05 0.05" size="0.048" density="0" group="3" rgba="1 0.3 0.3 0.35" />
+      <geom name="robot_06_torso_link_collision_2" type="capsule" fromto="0.04 0.05 0.22 0.05 0.05 0.05" size="0.048" density="0" group="3" rgba="1 0.3 0.3 0.35" />
     </body>
   </worldbody>
   <actuator>

@@ -28,6 +28,6 @@ right_hip_yaw,revolute,right_hip_roll_link,right_hip_yaw_link,0.02,0,-0.134,0,0,
 right_knee,revolute,right_hip_yaw_link,right_knee_link,-0.02,0,-0.1674,0,0,0,0,1,0,140,20.94,-0.0872,2.44,0.041,0,0
 right_ankle_pitch,revolute,right_knee_link,right_ankle_pitch_link,0,0,-0.3,0,0,0,0,1,0,50,12.82,-0.872,0.523,0.0077733,0,0
 right_ankle_roll,revolute,right_ankle_pitch_link,right_ankle_roll_link,0,0,-0.0175,0,0,0,1,0,0,25,25.65,-0.261,0.261,0.0026244,0,0
-head_pitch,revolute,torso_link,head_pitch_link,0.00555,0,0.3155,0,0,0,0,1,0,12,24.12,-1.309,1.309,0.005521,0,0
-head_yaw,revolute,head_pitch_link,head_yaw_link,0,0,0.0795,0,0,0,0,0,1,12,24.12,-1.57,1.57,0.005521,0,0
-camera,fixed,head_yaw_link,camera_link,0.069,0,0.068,0,0,0,0,1,0,100,100,-1.57,1.57,,0,0
+head_yaw,revolute,torso_link,head_yaw_link,0.0005,0,0.325,0,0,0,0,0,1,12,24.12,-1.57,1.57,0.005521,0,0
+head_pitch,revolute,head_yaw_link,head_pitch_link,0,0,0.054,0,0,0,0,1,0,12,24.12,-0.436,0.436,0.005521,0,0
+camera,fixed,head_pitch_link,camera_link,0.065162,0,0.0934945,0,0.628,0,0,1,0,100,100,-1.57,1.57,,0,0

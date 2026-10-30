@@ -54,7 +54,7 @@
       <inertia ixx="0.000407971" ixy="-0.0000044895" ixz="0.0000445625" iyy="0.0005055443" iyz="-0.0000236763" izz="0.0003430974"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0.18 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/left_shoulder_roll_link.STL" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
@@ -75,7 +75,7 @@
       <inertia ixx="0.0032909907" ixy="0.0000278928" ixz="-0.0004062719" iyy="0.0032723687" iyz="-0.0001601849" izz="0.0009792113"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0.0015" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/left_shoulder_yaw_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
@@ -117,7 +117,7 @@
       <inertia ixx="0.0009569698" ixy="-5.04e-08" ixz="7.208e-07" iyy="0.0008286595" iyz="0.0000261958" izz="0.0006027941"/>
     </inertial>
     <visual>
-      <origin xyz="-0.00004 0 0.004" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/left_wrist_yaw_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
@@ -164,8 +164,8 @@
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><mesh filename="package://T4_v2/meshes/T4Lhand.STL" scale="0.001 0.001 0.001"/></geometry>
+      <origin xyz="0 0 -0.038" rpy="0 0 0"/>
+      <geometry><mesh filename="package://T4_v2/meshes/left_openhand.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.1 0.1 0.1 1"/></material>
     </visual>
   </link>
@@ -206,7 +206,7 @@
       <inertia ixx="0.000407971" ixy="0.0000044895" ixz="0.0000445625" iyy="0.0005055443" iyz="0.0000236763" izz="0.0003430974"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="-0.18 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/right_shoulder_roll_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
@@ -227,7 +227,7 @@
       <inertia ixx="0.0032909907" ixy="-0.0000278928" ixz="-0.0004062719" iyy="0.0032723687" iyz="0.0001601849" izz="0.0009792113"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0.0015" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/right_shoulder_yaw_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
@@ -269,7 +269,7 @@
       <inertia ixx="0.0009569698" ixy="5.04e-08" ixz="7.208e-07" iyy="0.0008286595" iyz="-0.0000261958" izz="0.0006027941"/>
     </inertial>
     <visual>
-      <origin xyz="-0.00004 0 0.004" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/right_wrist_yaw_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
@@ -316,8 +316,8 @@
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><mesh filename="package://T4_v2/meshes/T4Rhand.STL" scale="0.001 0.001 0.001"/></geometry>
+      <origin xyz="0 0 -0.038" rpy="0 0 0"/>
+      <geometry><mesh filename="package://T4_v2/meshes/right_openhand.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.1 0.1 0.1 1"/></material>
     </visual>
   </link>
@@ -421,7 +421,7 @@
       <inertia ixx="0.0038422574" ixy="0.0000067506" ixz="0.0006040957" iyy="0.0038255287" iyz="0.0000348101" izz="0.003430122"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0.02 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/left_hip_roll_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
@@ -442,7 +442,7 @@
       <inertia ixx="0.0106458587" ixy="0.0001389265" ixz="0.0013139034" iyy="0.0110471646" iyz="0.0005455942" izz="0.0028807363"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0.059" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/left_hip_yaw_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
@@ -594,7 +594,7 @@
       <inertia ixx="0.0038422574" ixy="-0.0000067506" ixz="0.0006040957" iyy="0.0038255287" iyz="-0.0000348101" izz="0.003430122"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0.02 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/right_hip_roll_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
@@ -615,7 +615,7 @@
       <inertia ixx="0.0106458587" ixy="-0.0001389265" ixz="0.0013139034" iyy="0.0110471646" iyz="-0.0005455942" izz="0.0028807363"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0.059" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/right_hip_yaw_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.418 0.418 0.418 1"/></material>
     </visual>
@@ -731,30 +731,9 @@
     </collision>
   </link>
 
-  <joint name="head_pitch" type="revolute">
-    <origin xyz="0.00555 0 0.3155" rpy="0 0 0"/>
-    <parent link="torso_link"/>
-    <child link="head_pitch_link"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="-1.309" upper="1.309" effort="12" velocity="24.12"/>
-  </joint>
-
-  <link name="head_pitch_link">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.01"/>
-      <inertia ixx="0.00003" ixy="0" ixz="0" iyy="0.00003" iyz="0" izz="0.00003"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><sphere radius="0.02"/></geometry>
-      <material name=""><color rgba="0.76 0.76 0.76 0.8"/></material>
-    </visual>
-  </link>
-
   <joint name="head_yaw" type="revolute">
-    <origin xyz="0 0 0.0795" rpy="0 0 0"/>
-    <parent link="head_pitch_link"/>
+    <origin xyz="0.0005 0 0.325" rpy="0 0 0"/>
+    <parent link="torso_link"/>
     <child link="head_yaw_link"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57" upper="1.57" effort="12" velocity="24.12"/>
@@ -762,20 +741,41 @@
 
   <link name="head_yaw_link">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.01"/>
-      <inertia ixx="0.00003" ixy="0" ixz="0" iyy="0.00003" iyz="0" izz="0.00003"/>
+      <origin xyz="0.0001031 0.0036049 0.0463794" rpy="0 0 0"/>
+      <mass value="0.2434"/>
+      <inertia ixx="0.000127" ixy="0" ixz="0" iyy="0.000120" iyz="0.000010" izz="0.000087"/>
     </inertial>
     <visual>
-      <origin xyz="-0.00555 0 0.025" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><mesh filename="package://T4_v2/meshes/head_yaw_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name=""><color rgba="0.1 0.1 0.1 1"/></material>
     </visual>
   </link>
 
-  <joint name="camera" type="fixed">
-    <origin xyz="0.069 0 0.068" rpy="0 0 0"/>
+  <joint name="head_pitch" type="revolute">
+    <origin xyz="0 0 0.054" rpy="0 0 0"/>
     <parent link="head_yaw_link"/>
+    <child link="head_pitch_link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.436" upper="0.436" effort="12" velocity="24.12"/>
+  </joint>
+
+  <link name="head_pitch_link">
+    <inertial>
+      <origin xyz="0.00727 0.0005818 0.0632918" rpy="0 0 0"/>
+      <mass value="0.8847"/>
+      <inertia ixx="0.002722" ixy="0.000003" ixz="0.000035" iyy="0.002948" iyz="-0.000012" izz="0.002063"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://T4_v2/meshes/head_pitch_link.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name=""><color rgba="0.1 0.1 0.1 1"/></material>
+    </visual>
+  </link>
+
+  <joint name="camera" type="fixed">
+    <origin xyz="0.065162 0 0.0934945" rpy="0 0.628 0"/>
+    <parent link="head_pitch_link"/>
     <child link="camera_link"/>
     <axis xyz="0 1 0"/>
     <limit lower="-1.57" upper="1.57" effort="100" velocity="100"/>

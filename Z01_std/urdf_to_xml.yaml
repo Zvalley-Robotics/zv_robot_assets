@@ -32,41 +32,129 @@ motors:
 visuals:
   collision_rgba: "0.76 0.76 0.76 0"   # 恢复踝部碰撞 box 的透明调试色
 
-# 装饰调试几何（rgba α=0，URDF 中已被注释掉、无法自动生成，来自手写 t4_std.xml）
+# 视觉清理 patches；碰撞体由文件末尾的 collisions 段统一生成（全 capsule）
 patches:
+  # 删除 fixed 关节折叠残留：waist_pitch/roll、head_yaw/head_pitch、camera 合并进
+  # torso_link 的占位球（URDF 导入器对球体省略 type 属性）
+  - {op: remove, xpath: "worldbody/body[@name='torso_link']/geom[not(@type)]"}
+
+# 头部相机。Z01_std 的头部关节全部为 fixed，URDF 导入器会把 head_yaw_link /
+# head_pitch_link / camera_link 折叠进 torso_link，因此相机直接挂在 torso_link 上；
+# pos = head_yaw(0.0005 0 0.325) + head_pitch(0 0 0.054) + camera(0.065162 0 0.0934945)
+# 的累积平移，xyaxes 表示相机前向 +x 下俯 36°。
+extras:
   - xpath: "worldbody/body[@name='torso_link']"
     append: |
-      <geom pos="0 0 0.12" type="box" size="0.05 0.08 0.17" rgba="0.76 0.76 0.76 0"/>
-      <geom pos="0 0 0.36" size="0.06" rgba="0.76 0.76 0.76 0"/>
-  - xpath: "worldbody/.//body[@name='left_shoulder_roll_link']"
-    append: |
-      <geom quat="0.707388 0 0.706825 0" type="cylinder" size="0.04 0.03" rgba="0.76 0.76 0.76 0"/>
-  - xpath: "worldbody/.//body[@name='right_shoulder_roll_link']"
-    append: |
-      <geom quat="0.707388 0 0.706825 0" type="cylinder" size="0.04 0.03" rgba="0.76 0.76 0.76 0"/>
-  - xpath: "worldbody/.//body[@name='left_elbow_link']"
-    append: |
-      <geom quat="0.707388 0.706825 0 0" type="cylinder" size="0.04 0.025" rgba="0.76 0.76 0.76 0"/>
-  - xpath: "worldbody/.//body[@name='right_elbow_link']"
-    append: |
-      <geom quat="0.707388 0.706825 0 0" type="cylinder" size="0.04 0.025" rgba="0.76 0.76 0.76 0"/>
-  - xpath: "worldbody/.//body[@name='left_wrist_roll_link']"
-    append: |
-      <geom pos="0 0 -0.02" type="box" size="0.025 0.015 0.05" rgba="0.76 0.76 0.76 0"/>
-  - xpath: "worldbody/.//body[@name='right_wrist_roll_link']"
-    append: |
-      <geom pos="0 0 -0.02" type="box" size="0.025 0.015 0.05" rgba="0.76 0.76 0.76 0"/>
-  - xpath: "worldbody/.//body[@name='left_hip_roll_link']"
-    append: |
-      <geom quat="0.707388 0 0.706825 0" type="cylinder" size="0.045 0.065" rgba="0.76 0.76 0.76 0"/>
-  - xpath: "worldbody/.//body[@name='right_hip_roll_link']"
-    append: |
-      <geom quat="0.707388 0 0.706825 0" type="cylinder" size="0.045 0.065" rgba="0.76 0.76 0.76 0"/>
-  - xpath: "worldbody/.//body[@name='left_knee_link']"
-    append: |
-      <geom quat="0.707388 0.706825 0 0" type="cylinder" size="0.05 0.05" rgba="0.76 0.76 0.76 0"/>
-      <geom pos="0 0 -0.16" type="cylinder" size="0.04 0.14" rgba="0.76 0.76 0.76 0"/>
-  - xpath: "worldbody/.//body[@name='right_knee_link']"
-    append: |
-      <geom quat="0.707388 0.706825 0 0" type="cylinder" size="0.05 0.05" rgba="0.76 0.76 0.76 0"/>
-      <geom pos="0 0 -0.16" type="cylinder" size="0.04 0.14" rgba="0.76 0.76 0.76 0"/>
+      <camera name="depth_cam" pos="0.065662 0 0.4724945"
+              xyaxes="0 -1 0 0.587785 0 0.809017" fovy="58.29" resolution="64 36"/>
+
+# 全胶囊碰撞体（连杆局部坐标，米）。所有数值均为手工调校，勿用 fit_capsule_collisions.py 覆盖。
+# 头部折叠规则：head_yaw_link / head_pitch_link 的胶囊在头部为 fixed 的变体（Z01_std）中
+# 由生成器沿 fixed 关节链折叠进 torso_link，在 add_head 系列中则挂到各自可动 body 上。
+
+collisions:
+  enabled: true
+  remove_existing: true
+  exclude_adjacent: true
+  # 同链 / 中轴内部：运动链距离 ≤N 的 body 对排除（子链相邻连杆不互撞）
+  exclude_distance: 4
+  # 中轴（躯干/腰/头）↔ 四肢：只排除链内前 N 级（肩/髋 pitch、roll、yaw）。
+  # 肩 yaw / 髋 yaw 的胶囊在几何上必然与躯干重叠（随机位姿接触率 ~99%），必须排除；
+  # 更外层（elbow、wrist_*、knee、ankle_*）保留与躯干的碰撞，
+  # 保证手臂/小腿扫到躯干时确实产生接触。
+  center_limb_distance: 3
+  # 左右髋的胶囊在骨盆处几何上互相穿插（hip_roll ≈ -15 mm、hip_yaw ≈ -37 mm），
+  # 且不属于"同级兄弟连杆"，需显式排除；hip_pitch 已由兄弟规则排除。
+  exclude_pairs:
+    - [left_hip_roll_link, right_hip_roll_link]
+    - [left_hip_yaw_link, right_hip_yaw_link]
+  group: 3
+  rgba: "1 0.3 0.3 0.35"
+  links:
+    head_pitch_link:
+      - {fromto: "0.0075 0 0.04 0.0045 0 0.089", size: 0.072}
+    head_yaw_link:
+      - {fromto: "0.0015 0 -0.015 0.0015 0 0.055", size: 0.039}
+    left_ankle_roll_link:
+      - {fromto: "0.125 -0.03 -0.0245 0.055 -0.03 -0.0245", size: 0.01}
+      - {fromto: "-0.041 -0.02 -0.0245 0.138 -0.02 -0.0245", size: 0.01}
+      - {fromto: "-0.05 -0.01 -0.0245 0.145 -0.01 -0.0245", size: 0.01}
+      - {fromto: "-0.051 0 -0.0245 0.148 0 -0.0245", size: 0.01}
+      - {fromto: "-0.051 0.01 -0.0245 0.145 0.01 -0.0245", size: 0.01}
+      - {fromto: "-0.041 0.02 -0.0245 0.138 0.02 -0.0245", size: 0.01}
+      - {fromto: "0.125 0.03 -0.0245 0.055 0.03 -0.0245", size: 0.01}
+      - {fromto: "-0.036 0 -0.0115 0.115 0 -0.0115", size: 0.025}
+    left_elbow_link:
+      - {fromto: "0 -0.01 0 0 0.02 0", size: 0.037}
+    left_hip_pitch_link:
+      - {fromto: "0 -0.01 -0.005 0 0.05 -0.03", size: 0.055}
+    left_hip_roll_link:
+      - {fromto: "0.02 0 0 0.02 0 -0.22", size: 0.055}
+    left_hip_yaw_link:
+      - {fromto: "-0.02 0.0085 -0.168 -0.02 -0.016 -0.168", size: 0.05}
+    left_knee_link:
+      - {fromto: "0.012 0 -0.26 0.026 0 -0.03", size: 0.04}
+      - {fromto: "-0.014 0 -0.195 -0.014 0 -0.08", size: 0.04}
+    left_shoulder_pitch_link:
+      - {fromto: "0.01 0.05 0 -0.01 0.05 0", size: 0.04}
+    left_shoulder_roll_link:
+      - {fromto: "0 0.0065 -0.13 0 0.0065 -0.015", size: 0.0365}
+    left_wrist_pitch_link:
+      - {fromto: "0 -0.011 0 0 0.006 0", size: 0.035}
+      - {fromto: "0 0 -0.055 0 0 -0.02", size: 0.032}
+    left_wrist_roll_link:
+      - {fromto: "0 0.005 -0.095 -0.001 0 -0.06", size: 0.025}
+      - {fromto: "0.008 0 0 -0.008 0 0", size: 0.0325}
+      - {fromto: "0.009 0 -0.033 -0.009 0 -0.033", size: 0.028}
+      - {fromto: "0 0.015 -0.093 0.007 -0.011 -0.196", size: 0.007}
+      - {fromto: "0.016 0.015 -0.093 0.023 -0.01 -0.19", size: 0.007}
+      - {fromto: "-0.009 0.015 -0.098 -0.01 -0.015 -0.188", size: 0.007}
+      - {fromto: "-0.022 0.01 -0.068 -0.025 -0.016 -0.179", size: 0.007}
+      - {fromto: "0.016 -0.01 -0.068 0.049 -0.035 -0.126", size: 0.007}
+    left_wrist_yaw_link:
+      - {fromto: "0 0 0.007 0 0 -0.058", size: 0.037}
+    right_ankle_roll_link:
+      - {fromto: "0.125 0.03 -0.0245 0.055 0.03 -0.0245", size: 0.01}
+      - {fromto: "-0.041 0.02 -0.0245 0.138 0.02 -0.0245", size: 0.01}
+      - {fromto: "-0.05 0.01 -0.0245 0.145 0.01 -0.0245", size: 0.01}
+      - {fromto: "-0.051 0 -0.0245 0.148 0 -0.0245", size: 0.01}
+      - {fromto: "-0.051 -0.01 -0.0245 0.145 -0.01 -0.0245", size: 0.01}
+      - {fromto: "-0.041 -0.02 -0.0245 0.138 -0.02 -0.0245", size: 0.01}
+      - {fromto: "0.125 -0.03 -0.0245 0.055 -0.03 -0.0245", size: 0.01}
+      - {fromto: "-0.036 0 -0.0115 0.115 0 -0.0115", size: 0.025}
+    right_elbow_link:
+      - {fromto: "0 0.01 0 0 -0.02 0", size: 0.037}
+    right_hip_pitch_link:
+      - {fromto: "0 0.01 -0.005 0 -0.05 -0.03", size: 0.055}
+    right_hip_roll_link:
+      - {fromto: "0.02 0 0 0.02 0 -0.22", size: 0.055}
+    right_hip_yaw_link:
+      - {fromto: "-0.02 -0.0085 -0.168 -0.02 0.016 -0.168", size: 0.05}
+    right_knee_link:
+      - {fromto: "0.012 0 -0.26 0.026 0 -0.03", size: 0.04}
+      - {fromto: "-0.014 0 -0.195 -0.014 -0 -0.08", size: 0.04}
+    right_shoulder_pitch_link:
+      - {fromto: "0.01 -0.05 0 -0.01 -0.05 0", size: 0.04}
+    right_shoulder_roll_link:
+      - {fromto: "0 -0.0065 -0.13 0 -0.0065 -0.015", size: 0.0365}
+    right_wrist_pitch_link:
+      - {fromto: "0 0.011 0 0 -0.006 0", size: 0.035}
+      - {fromto: "0 0 -0.055 0 0 -0.02", size: 0.032}
+    right_wrist_roll_link:
+      - {fromto: "0 -0.005 -0.095 -0.001 0 -0.06", size: 0.025}
+      - {fromto: "0.008 0 0 -0.008 0 0", size: 0.0325}
+      - {fromto: "0.009 0 -0.033 -0.009 0 -0.033", size: 0.028}
+      - {fromto: "0 -0.015 -0.093 0.007 0.011 -0.196", size: 0.007}
+      - {fromto: "0.016 -0.015 -0.093 0.023 0.01 -0.19", size: 0.007}
+      - {fromto: "-0.009 -0.015 -0.098 -0.01 0.015 -0.188", size: 0.007}
+      - {fromto: "-0.022 -0.01 -0.068 -0.025 0.016 -0.179", size: 0.007}
+      - {fromto: "0.016 0.01 -0.068 0.049 0.035 -0.126", size: 0.007}
+    right_wrist_yaw_link:
+      - {fromto: "0 0 0.007 0 0 -0.058", size: 0.037}
+    torso_link:
+      - {fromto: "-0.005 0 0.22 0.005 0 0.05", size: 0.096}
+      - {fromto: "0.04 -0.05 0.22 0.05 -0.05 0.05", size: 0.048}
+      - {fromto: "0.04 0.05 0.22 0.05 0.05 0.05", size: 0.048}
+    waist_yaw_link:
+      - {fromto: "0 0 -0.02 0 0 -0.06", size: 0.046}
+      - {fromto: "0.008 -0.016 -0.102 0.008 0.016 -0.102", size: 0.073}

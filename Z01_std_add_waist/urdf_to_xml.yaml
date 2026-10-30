@@ -1,0 +1,4 @@
+# Z01_std_add_waist URDF → XML 生成配置（量产加腰版）
+# 机器人本体与 Z01_std 一致，仅腰部 pitch/roll/yaw 三个关节为 revolute；
+# 头部关节仍为 fixed（导入器折叠进 torso_link，相机 extras 直接继承 Z01_std）。
+extends: ../Z01_std/urdf_to_xml.yaml

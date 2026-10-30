@@ -36,6 +36,21 @@ python3 robot_assets/utils/gen_robocup_multi_xml.py --check  # 只校验（重�
 | 纹理/材质/中圈网格 | `<include file="../../Z01_std_football_player/xml/scene/soccer_field_assets.xml"/>` |
 | 网格文件 | `<compiler meshdir="../../Z01_std_football_player/meshes/"/>`（该目录同时含机器人 STL 与 `center_circle_ring.obj`，零网格重复） |
 
+## 队伍配色
+
+6 台机器人按起始边线分成两队，生成器只把**躯干网格**（`torso_link`）换成队伍材质，
+四肢、头部等其余部件保持模板原配色：
+
+| 机器人 | 起始位置 | 队伍 | 材质 |
+| --- | --- | --- | --- |
+| robot_01..03 | +y 边线外 | 蓝队 | `team_blue_mat` |
+| robot_04..06 | -y 边线外 | 红队 | `team_red_mat` |
+
+- 材质只在主 XML 的 `<asset>` 里定义一次；`robots/robot_0X.xml` 里的躯干 geom 用
+  `material` 引用，不再带 `rgba`，其余 geom 不变。
+- 改配色只改生成器的 `TEAM_COLORS` / `TEAM_OF_ROBOT`，然后重跑生成器；
+  机器人本体（`Z01_std_parallel_ankle`）保持原样。
+
 与 `Z01_std_football_player` 的两处故意差异：
 
 1. **足球位于场心 `(0, 0, 0.11)`**。football_player 把球藏在 `z=-100`，由它的

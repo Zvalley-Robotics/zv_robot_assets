@@ -8,18 +8,22 @@
 
 | 目录 | 可动关节 | 说明 |
 | --- | --- | --- |
-| `Z01_std` | 29 | 基线模型：双臂 2 × 7 自由度（肩 ×3、肘、腕 ×3）、腰 3 自由度、双腿 2 × 6 自由度（髋 ×3、膝、踝 ×2） |
-| `Z01_std_add_head` | 29 | 在 `Z01_std` 基础上增加 2 自由度头部（`head_pitch` / `head_yaw`）与相机挂载；腰 pitch/roll 焊死 |
+| `Z01_std` | 27 | 基线模型：双臂 2 × 7 自由度（肩 ×3、肘、腕 ×3）、腰 1 自由度（`waist_yaw`；pitch/roll 焊死）、双腿 2 × 6 自由度（髋 ×3、膝、踝 ×2）；头部固定，带一路深度相机 |
+| `Z01_std_add_head` | 29 | 在 `Z01_std` 基础上将头部改为 2 自由度可动（`head_pitch` / `head_yaw`）并挂载相机；腰 pitch/roll 焊死 |
+| `Z01_std_add_orin` | 29 | 运动学与 `Z01_std_add_head` 一致，额外搭载 Orin 计算模块：外观网格更新为 T4_STL_1023_4，躯干质量/惯量按 Orin 版本调整 |
+| `Z01_std_add_waist` | 29 | 本体同 `Z01_std`，但腰部 pitch/roll/yaw 三个关节均可动；头部仍固定（相机折叠进 `torso_link`） |
 | `Z01_std_parallel_ankle` | 33 | 增加踝部并联机构：每侧两根连杆关节（`ankle_1` / `ankle_2`）通过肌腱 equality 约束与 `ankle_pitch` / `ankle_roll` 刚性耦合。**多机器人场景中机器人本体的唯一真源。** |
 | `Z01_std_football_player` | 33 | 机器人本体同 `parallel_ankle`，另含 RoboCup 足球场场景（`xml/scene/soccer_field.xml`、`soccer_field_assets.xml`、`center_circle_ring.obj`） |
-| `Z01_std_robocup` | 6 × 33 | 生成的多机器人场景：同一片场地上 6 台 `parallel_ankle` 机器人，各带一路深度相机。详见 [`Z01_std_robocup/README.md`](Z01_std_robocup/README.md) |
+| `Z01_std_robocup` | 6 × 33 | 生成的多机器人场景：同一片场地上 6 台 `parallel_ankle` 机器人，各带一路深度相机，分两队配色（robot_01..03 蓝队 / robot_04..06 红队）。详见 [`Z01_std_robocup/README.md`](Z01_std_robocup/README.md) |
 
 ## 仓库结构
 
 ```
 zv_robot_assets/
-├── Z01_std/                     # 基线模型，29 自由度
-├── Z01_std_add_head/            # + 2 自由度头部 + 相机
+├── Z01_std/                     # 基线模型，27 自由度，头部固定 + 相机
+├── Z01_std_add_head/            # + 2 自由度可动头部 + 相机
+├── Z01_std_add_orin/            # add_head + Orin 计算模块
+├── Z01_std_add_waist/           # + 3 自由度可动腰（头部固定）
 ├── Z01_std_parallel_ankle/      # + 踝部并联机构（肌腱耦合）
 ├── Z01_std_football_player/     # + RoboCup 足球场场景
 └── Z01_std_robocup/             # 6 机器人多机场景（生成物）
@@ -33,14 +37,19 @@ zv_robot_assets/
 ├── xml/             # 生成的 MuJoCo MJCF 模型（生成物，勿手改）
 ├── meshes/          # STL/OBJ 网格（毫米单位，导入时缩放 0.001）
 ├── csv/             # 关节/连杆参数表：限位、力矩、armature、惯量、网格位姿
-└── urdf_to_xml.yaml # 生成配置：基座高度、分模式 armature、电机规则、XPath 装饰补丁
+└── urdf_to_xml.yaml # 生成配置：基座高度、分模式 armature、电机规则、
+                     # 胶囊碰撞规则、相机与装饰补丁
 ```
+
+手部网格成对提供握拳 / 张开两种（`left_fist` / `left_openhand`、
+`right_fist` / `right_openhand`），生成的模型引用张开版网格；足部几何已并入
+踝 roll 网格，不再有独立的 foot 网格。
 
 ## 生成流程
 
 `xml/` 下的文件全部是**生成物**。修改机器人的正确方式：
 
-1. 修改 **URDF**（几何、运动学、惯量）、**CSV**（手工实测参数，如 `armature`）或 **`urdf_to_xml.yaml`**（基座高度、分模式 armature、电机 `ctrlrange` 规则、经 XPath 追加的装饰调试几何）。
+1. 修改 **URDF**（几何、运动学、惯量）、**CSV**（手工实测参数，如 `armature`）或 **`urdf_to_xml.yaml`**（基座高度、分模式 armature、电机 `ctrlrange` 规则、全胶囊碰撞规则与显式排除对、经 XPath 追加的相机与装饰补丁）。
 2. 用配套仿真工作区（`robot_assets/utils/`）的转换器重新生成 MJCF。不要手改 `xml/` 下的任何文件。
 
 `Z01_std_robocup` 场景由 `robot_assets/utils/gen_robocup_multi_xml.py` 生成：
